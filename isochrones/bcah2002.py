@@ -10,7 +10,7 @@ try:
     import pandas as pd
 except ImportError:
     pd = None
-    
+
 import pickle
 
 #from .isochrone import Isochrone
@@ -66,10 +66,10 @@ class BCAH2002_Isochrone(Isochrone):
             tri = pickle.load(f,encoding='latin-1')
         finally:
             f.close()
-        
+
         Isochrone.__init__(self,df['mass'],df['Age'],
                            df['feh'],df['mass'],df['logL'],
-                           df['Teff'],df['logg'],mags,tri=tri, 
+                           df['Teff'],df['logg'],mags,tri=tri,
                            minage=minage, **kwargs)
 
     def agerange(self, m, feh=0.0):
@@ -89,7 +89,7 @@ def write_tri(df=df1, outfile=TRI_FILE):
     pts = np.zeros((N,3))
     pts[:,0] = np.array(df['mass'])
     pts[:,1] = np.array(df['Age'])
-    pts[:,2] = np.array(df['feh']) 
+    pts[:,2] = np.array(df['feh'])
     Jmags = np.array(df['J'])
 
     Jfn = interpnd(pts,Jmags)
@@ -98,3 +98,6 @@ def write_tri(df=df1, outfile=TRI_FILE):
     pickle.dump(Jfn.tri,f)
     f.close()
     return Jfn
+
+
+#write_tri()
